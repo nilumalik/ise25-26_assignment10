@@ -1,17 +1,25 @@
 package de.seuhd.observer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Subject {
-    // TODO: Add fields.
 
-    void attach(Observer observer) {
-        // TODO: Implement attach method.
+    private List<Observer> observers = new ArrayList<>();
+
+    // Alle Methoden public, damit ConcreteSubject sie aufrufen kann
+    public void attach(Observer observer) {
+        observers.add(observer);
     }
 
-    void detach(Observer observer) {
-        // TODO: Implement detach method.
+    public void detach(Observer observer) {
+        observers.remove(observer);
     }
 
-    protected void notifyObservers() {
-        // TODO: Implement fireUpdate method.
+    public void notifyObservers() {
+        System.out.println("Sending update to observers ...");
+        for (Observer observer : observers) {
+            observer.update(this);
+        }
     }
 }
